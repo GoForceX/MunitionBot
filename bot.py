@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import nonebot
-from nonebot.adapters.mirai import Bot
+from nonebot.adapters.cqhttp import Bot as CQHTTPBot
 
 # Custom your logger
 # 
@@ -17,7 +17,7 @@ from nonebot.adapters.mirai import Bot
 nonebot.init()
 
 driver = nonebot.get_driver()
-driver.register_adapter("mirai", Bot, qq=2472657843)
+driver.register_adapter("cqhttp", CQHTTPBot)
 app = nonebot.get_asgi()
 
 nonebot.load_from_toml("pyproject.toml")

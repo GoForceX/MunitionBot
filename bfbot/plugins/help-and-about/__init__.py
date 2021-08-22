@@ -1,26 +1,3 @@
-from pathlib import Path
-
-import nonebot
-from nonebot import get_driver
-
-from .config import Config
-
-global_config = get_driver().config
-config = Config(**global_config.dict())
-
-# Export something for other plugin
-# export = nonebot.export()
-# export.foo = "bar"
-
-# @export.xxx
-# def some_function():
-#     pass
-
-_sub_plugins = set()
-_sub_plugins |= nonebot.load_plugins(
-    str((Path(__file__).parent / "plugins").
-    resolve()))
-
 from nonebot import on_command
 from nonebot.permission import SUPERUSER
 from nonebot.typing import T_State
@@ -48,11 +25,11 @@ about = on_command("about")
 @about.handle()
 async def about_handler(bot: Bot, event: Event, state: T_State):
     await about.finish("""关于此Bot
-版本：0.1.0 beta 1 (2021.08.20)
+版本：0.2.0 beta 1 (2021.08.22)
 
 bot目前仍处在BETA阶段，可能会出现一些bug，请您多多谅解。
 
-此Bot基于mirai[https://github.com/mamoe/mirai]
+此Bot基于go-cqhttp[https://github.com/Mrs4s/go-cqhttp]
 与nonebot[https://github.com/nonebot/nonebot2]
 两个项目进行开发，并使用了由[https://gametools.network]提供的api，
 开发者对以上项目表示感谢。

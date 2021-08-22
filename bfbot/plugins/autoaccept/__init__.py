@@ -1,43 +1,23 @@
-from pathlib import Path
-
-import nonebot
-from nonebot import get_driver
-
-from .config import Config
-
-global_config = get_driver().config
-config = Config(**global_config.dict())
-
-# Export something for other plugin
-# export = nonebot.export()
-# export.foo = "bar"
-
-# @export.xxx
-# def some_function():
-#     pass
-
-_sub_plugins = set()
-_sub_plugins |= nonebot.load_plugins(
-    str((Path(__file__).parent / "plugins").
-    resolve()))
-
-
 from nonebot import on_request
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-from nonebot.adapters.mirai.event.request import NewFriendRequestEvent, BotInvitedJoinGroupRequestEvent
+from nonebot.adapters.cqhttp.event import FriendRequestEvent, GroupRequestEvent
 from nonebot.log import logger
 
 async def on_friend_request(bot: Bot, event: Event, state: T_State) -> bool: 
-    return isinstance(event, NewFriendRequestEvent)
+    return isinstance(event, FriendRequestEvent)
 
 async def on_group_request(bot: Bot, event: Event, state: T_State) -> bool: 
-    return isinstance(event, BotInvitedJoinGroupRequestEvent)
+    return isinstance(event, GroupRequestEvent)
 
 friend_req = on_request(on_friend_request)
 group_req = on_request(on_group_request)
 
 @friend_req.handle()
-@group_req.handle()
-async def accept_request(bot: Bot, event: Event, state: T_State) -> bool:
+async def accept_friend_request(bot: Bot, event: Event, state: T_State) -> bool:
     await event.approve(bot)
+
+@group_req.handle()
+async def accept_group_request(bot: Bot, event: Event, state: T_State) -> bool:
+    if event.sub_type == 'invite':
+        await event.approve(bot)

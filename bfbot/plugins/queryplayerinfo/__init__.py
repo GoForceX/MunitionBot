@@ -1,36 +1,19 @@
-from pathlib import Path
-
-import nonebot
-from nonebot import get_driver
-
-from .config import Config
-
-global_config = get_driver().config
-config = Config(**global_config.dict())
-
-# Export something for other plugin
-# export = nonebot.export()
-# export.foo = "bar"
-
-# @export.xxx
-# def some_function():
-#     pass
-
-_sub_plugins = set()
-_sub_plugins |= nonebot.load_plugins(
-    str((Path(__file__).parent / "plugins").
-    resolve()))
-
 from nonebot import on_command
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-import httpx
+import httpx, os, base64
 from nonebot.log import logger
+from io import BytesIO
+from PIL import Image, ImageDraw, ImageFont
+from nonebot.adapters.cqhttp.message import MessageSegment
+from nonebot.adapters import Message
 
 query = on_command("player") 
 
 @query.handle()
 async def handle_message(bot: Bot, event: Event, state: T_State):
+    sender_id = event.get_user_id()
+    message_type = event.get_session_id().split('_')[0]
     args = str(event.get_message()).strip().split(' ')
     if len(args) == 1:
         await query.finish("呀，版本号或者ID不见了呢（笑")
@@ -49,29 +32,43 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 logger.debug(result)
                 if "detail" in result:
                     await query.finish("欸，找不到此ID对应的玩家")
-                await query.finish("用户名：" +
-                    str(result["userName"]) +
-                    "\n等级：" +
-                    str(result["rank"]) +
-                    "\n命中率：" +
-                    str(result["accuracy"]) +
-                    "\n爆头率：" +
-                    str(result["headshots"]) +
-                    "\nK/D：" +
-                    str(result["killDeath"]) +
-                    "\nKPM：" +
-                    str(result["killsPerMinute"]) +
-                    "\n协助击杀数：" +
-                    str(result["killAssists"]) +
-                    "\nK：" +
-                    str(result["kills"]) +
-                    "\nD：" +
-                    str(result["deaths"]) +
-                    "\nWin：" +
-                    str(result["wins"]) +
-                    "\nLose：" +
-                    str(result["loses"]) +
-                    "\n胜率：" +
-                    str(result["winPercent"]))
+                text = ("用户名：" +
+                str(result["userName"]) +
+                "\n等级：" +
+                str(result["rank"]) +
+                "\n命中率：" +
+                str(result["accuracy"]) +
+                "\n爆头率：" +
+                str(result["headshots"]) +
+                "\nK/D：" +
+                str(result["killDeath"]) +
+                "\nKPM：" +
+                str(result["killsPerMinute"]) +
+                "\n协助击杀数：" +
+                str(result["killAssists"]) +
+                "\nK：" +
+                str(result["kills"]) +
+                "\nD：" +
+                str(result["deaths"]) +
+                "\nWin：" +
+                str(result["wins"]) +
+                "\nLose：" +
+                str(result["loses"]) +
+                "\n胜率：" +
+                str(result["winPercent"]))
+
+                image = Image.open(os.path.join(os.path.abspath('.'), 'bf-mod.png'))
+                drawer = ImageDraw.Draw(image)
+                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'DENG.TTF'), 40)
+                drawer.text((50, 50), text, font=font, fill="#000090")
+                img_io = BytesIO()
+                image.save(img_io, format="PNG")
+                
+                await query.finish(
+                    Message(
+                        MessageSegment.at(sender_id) + 
+                        MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
+                    )
+                )
         await query.finish("怪起来了，你这指令有问题啊")
     await query.finish("版本只能是bf1/bf4/bfv，别搞错了哦")

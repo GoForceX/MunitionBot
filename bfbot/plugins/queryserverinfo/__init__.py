@@ -1,26 +1,3 @@
-from pathlib import Path
-
-import nonebot
-from nonebot import get_driver
-
-from .config import Config
-
-global_config = get_driver().config
-config = Config(**global_config.dict())
-
-# Export something for other plugin
-# export = nonebot.export()
-# export.foo = "bar"
-
-# @export.xxx
-# def some_function():
-#     pass
-
-_sub_plugins = set()
-_sub_plugins |= nonebot.load_plugins(
-    str((Path(__file__).parent / "plugins").
-    resolve()))
-
 from nonebot import on_command
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
