@@ -15,11 +15,11 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
         await query.finish("命令格式突然不对劲起来了（笑\n格式是#server <bf1/bf4/bfv> <name>哦")
     if args[0] == "bf1" or args[0] == "bf4" or args[0] == "bfv":
         if args[0] and args[1]:
-            logger.debug("Requesting: https://api.gametools.network/" + args[0] + "/servers/?name=" + args[1] + "&lang=en-us&region=all&platform=pc&limit=10")
+            logger.debug("Requesting: https://api.gametools.network/" + args[0] + "/servers/?name=" + args[1] + "&lang=zh-cn&region=all&platform=pc&limit=10")
             async with httpx.AsyncClient() as client:
                 try:
                     await query.send("稍等下，正在获取您请求的信息……")
-                    resp = await client.get("https://api.gametools.network/" + args[0] + "/servers/?name=" + args[1] + "&lang=en-us&region=all&platform=pc&limit=10", timeout=10.0)
+                    resp = await client.get("https://api.gametools.network/" + args[0] + "/servers/?name=" + args[1] + "&lang=zh-cn&region=all&platform=pc&limit=10", timeout=10.0)
                 except httpx.ReadTimeout:
                     await query.finish("太对不起了，请求超时了（悲")
                 result = resp.json()["servers"]
