@@ -25,7 +25,7 @@ about = on_command("about")
 @about.handle()
 async def about_handler(bot: Bot, event: Event, state: T_State):
     await about.finish("""关于此Bot
-版本：0.2.0 beta 1 (2021.08.22)
+版本：0.2.0 beta 2 (2021.08.24)
 
 bot目前仍处在BETA阶段，可能会出现一些bug，请您多多谅解。
 

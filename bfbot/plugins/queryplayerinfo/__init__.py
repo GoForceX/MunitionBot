@@ -57,9 +57,9 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 "\n胜率：" +
                 str(result["winPercent"]))
 
-                image = Image.open(os.path.join(os.path.abspath('.'), 'bf-mod.png'))
+                image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-mod.png'))
                 drawer = ImageDraw.Draw(image)
-                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'DENG.TTF'), 40)
+                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'Rajdhani+Deng.ttf'), 40)
                 drawer.text((50, 50), text, font=font, fill="#000090")
                 img_io = BytesIO()
                 image.save(img_io, format="PNG")
