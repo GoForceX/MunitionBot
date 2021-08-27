@@ -14,6 +14,7 @@ async def help_handler(bot: Bot, event: Event, state: T_State):
 查询某玩家的基本信息
 #server <bf1/bf4/bfv> <name>
 根据服务器名字查找服务器
+#weapon <bf1/bfv> <id>
 #help
 展示此帮助
 #about
@@ -25,7 +26,7 @@ about = on_command("about")
 @about.handle()
 async def about_handler(bot: Bot, event: Event, state: T_State):
     await about.finish("""关于此Bot
-版本：0.2.0 beta 2 (2021.08.24)
+版本：0.3.0 beta 1 (2021.08.27)
 
 bot目前仍处在BETA阶段，可能会出现一些bug，请您多多谅解。
 
