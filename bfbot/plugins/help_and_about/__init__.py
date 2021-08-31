@@ -1,4 +1,9 @@
+import base64
+from io import BytesIO
+import os
+from PIL import Image
 from nonebot import on_command
+from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from nonebot.permission import SUPERUSER
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
@@ -25,19 +30,13 @@ about = on_command("about")
 
 @about.handle()
 async def about_handler(bot: Bot, event: Event, state: T_State):
-    await about.finish("""关于此Bot
-版本：0.3.0 beta 1 (2021.08.27)
+    image = Image.open(os.path.join('static', 'about_banner.png'))
+    img_io = BytesIO()
+    image.save(img_io, format="PNG")
 
-bot目前仍处在BETA阶段，可能会出现一些bug，请您多多谅解。
-
-此Bot基于go-cqhttp[https://github.com/Mrs4s/go-cqhttp]
-与nonebot[https://github.com/nonebot/nonebot2]
-两个项目进行开发，并使用了由[https://gametools.network]提供的api，
-开发者对以上项目表示感谢。
-此Bot基于AGPL 3.0协议开源[https://github.com/GoForceX/BFBot/]。
-
-战地系列游戏是由EA与DICE工作室制作并发行的，
-本工具与EA或DICE工作室无关。""")
+    await about.finish(Message(
+        MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
+    ))
 
 status = on_command("status", permission=SUPERUSER)
 
