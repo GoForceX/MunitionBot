@@ -35,6 +35,7 @@ async def about_handler(bot: Bot, event: Event, state: T_State):
     image.save(img_io, format="PNG")
 
     await about.finish(Message(
+        '版本: 0.3.1 beta 2 (2021.09.02)' + 
         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
     ))
 
