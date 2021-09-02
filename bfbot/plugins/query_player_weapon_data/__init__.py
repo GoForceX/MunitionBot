@@ -52,18 +52,3 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 )
         await query.finish("怪起来了，你这指令有问题啊")
     await query.finish("版本只能是bf1/bfv，别搞错了哦（顺带一提这个暂时还不支持bf4")
-
-
-
-'''image = Image.open('bf4-top8.png') # Image.new('RGB', (700, 575), (255, 255, 255))
-drawer = ImageDraw.Draw(image)
-font = ImageFont.truetype("E:\\code\\mirai-bot-code\\BFBot\\static\\Rajdhani+Deng.ttf", 20)
-drawer.text((83, 40), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((499, 40), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((83, 203), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((499, 203), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((83, 363), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((499, 363), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((83, 526), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-drawer.text((499, 526), 'Karabin 1938M 半自动步枪\n' + '击杀:12414'.ljust(14) + '爆头:12431'.center(14) + '\n命中率:99.99%'.ljust(14) + '爆头率:99.99%'.center(14) + '\n效率:10'.ljust(14) + 'KPM:99.99'.center(14), font=font, fill="#e0e0e0")
-'''

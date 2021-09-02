@@ -20,6 +20,7 @@ async def help_handler(bot: Bot, event: Event, state: T_State):
 #server <bf1/bf4/bfv> <name>
 根据服务器名字查找服务器
 #weapon <bf1/bfv> <id>
+根据玩家ID查找玩家战绩较突出的武器
 #help
 展示此帮助
 #about
