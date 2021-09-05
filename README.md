@@ -51,4 +51,4 @@
 
 ## DISCLAIMER
 
-> Battlefield is a registered trademark of Electronic Arts Inc. Trademarks in this repo are the property of their respective owners. Electronic Arts Inc owns the copyright of game materials. This repo is not affiliated with Electronic Arts Inc and this repo is not authorized by Electronic Arts Inc and it is not responsible for this repo and the content within.
+> Battlefield is a registered trademark of Electronic Arts Inc. Trademarks in this repo are the property of their respective owners. Electronic Arts Inc owns the copyright of game materials. This repo is not affiliated with Electronic Arts Inc and this repo is not authorized by Electronic Arts Inc. Electronic Arts is not responsible for this repo and the content within.
