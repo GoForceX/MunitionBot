@@ -13,7 +13,6 @@ query = on_command("weapon")
 @query.handle()
 async def handle_message(bot: Bot, event: Event, state: T_State):
     sender_id = event.get_user_id()
-    message_type = event.get_session_id().split('_')[0]
     args = str(event.get_message()).strip().split(' ')
     if len(args) == 1:
         await query.finish("呀，版本号或者ID不见了呢（笑")
@@ -36,7 +35,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
 
                 image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-top8.png'))
                 drawer = ImageDraw.Draw(image)
-                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'Rajdhani+Deng.ttf'), 20)
+                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'HarmonyOS_Sans_SC_Regular.ttf'), 20)
                 for i in range(4): 
                     for j in range(2):
                         drawer.text((83 + 416 * j, 40 + 163 * i),  f'{result[2*i+j]["weaponName"]}' + '\n' + f'击杀:{result[2*i+j]["kills"]}'.ljust(14) + f'爆头:{int(result[2*i+j]["kills"] * float(result[2*i+j]["headshots"][:-1])/100)}'.center(14) + '\n' + f'命中率:{result[2*i+j]["accuracy"]}'.ljust(14) + f'爆头率:{result[2*i+j]["headshots"]}'.center(14) + '\n' + f'效率:{result[2*i+j]["hitVKills"]}'.ljust(14) + f'KPM:{result[2*i+j]["killsPerMinute"]}'.center(14), font=font, fill="#e0e0e0")

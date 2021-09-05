@@ -32,10 +32,9 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 logger.debug(result)
                 if len(result) == 0:
                     await query.finish("欸，找不到此名称对应的服务器")
-                results = []
                 image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-top8.png'))
                 drawer = ImageDraw.Draw(image)
-                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'Rajdhani+Deng.ttf'), 20)
+                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'HarmonyOS_Sans_SC_Regular.ttf'), 20)
                 for i in range(4): 
                     for j in range(2):
                         if 2*i+j >= len(result):

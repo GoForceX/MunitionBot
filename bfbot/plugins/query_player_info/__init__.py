@@ -13,7 +13,6 @@ query = on_command("player")
 @query.handle()
 async def handle_message(bot: Bot, event: Event, state: T_State):
     sender_id = event.get_user_id()
-    message_type = event.get_session_id().split('_')[0]
     args = str(event.get_message()).strip().split(' ')
     if len(args) == 1:
         await query.finish("呀，版本号或者ID不见了呢（笑")
@@ -59,7 +58,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
 
                 image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-mod.png'))
                 drawer = ImageDraw.Draw(image)
-                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'Rajdhani+Deng.ttf'), 40)
+                font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'HarmonyOS_Sans_SC_Regular.ttf'), 40)
                 drawer.text((50, 50), text, font=font, fill="#000090")
                 img_io = BytesIO()
                 image.save(img_io, format="PNG")
