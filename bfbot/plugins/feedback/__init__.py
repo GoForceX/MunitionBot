@@ -1,7 +1,8 @@
 import nonebot
-from nonebot import on_command
+from nonebot import on_command, logger
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
+import traceback
 
 feedback = on_command("feedback")
 
@@ -14,6 +15,6 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
         for user in nonebot.get_driver().config.superusers:
             await bot.send_private_msg(user_id=user, message=f'用户{sender_id}给bot提了个小建议哦' + '\n' + msg)
     except Exception as e:
-        e.with_traceback()
+        logger.error(traceback.format_exc())
         await feedback.finish('呜呜呜发送失败了，请稍后再试试')
     await feedback.finish('已经传达到管理员啦~')
