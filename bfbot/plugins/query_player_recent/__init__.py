@@ -69,7 +69,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         playTime = datetime.datetime.utcfromtimestamp(result[2*i+j]["timestamp"])
                         strTime = playTime.strftime("%Y-%m-%d %H:%M:%S")
                         drawer.text((83 + 416 * j, 40 + 163 * i),  "服务器名：" +
-                            str(result[2*i+j]["serverName"][:22] + ('...' if len(result[2*i+j]["prefix"]) > 22 else '')) +
+                            str(result[2*i+j]["serverName"][:22] + ('...' if len(result[2*i+j]["serverName"]) > 22 else '')) +
                             ("\n模式：" +
                             str(bfv_modes[result[2*i+j]["modeKey"]])).ljust(10) +
                             ("地图：" +
