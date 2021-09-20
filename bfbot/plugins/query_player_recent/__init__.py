@@ -52,7 +52,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
             async with httpx.AsyncClient() as client:
                 try:
                     await query.send("稍等下，正在获取您请求的信息……")
-                    resp = await client.get("https://api.tracker.gg/api/v1/" + args[0] + "gamereports/origin/latest/" + args[1], timeout=10.0)
+                    resp = await client.get("https://api.tracker.gg/api/v1/" + args[0] + "/gamereports/origin/latest/" + args[1], timeout=10.0)
                 except httpx.ReadTimeout:
                     await query.finish("太对不起了，请求超时了（悲")
                 result = resp.json()["data"]["reports"]
