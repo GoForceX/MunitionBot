@@ -21,6 +21,8 @@ async def help_handler(bot: Bot, event: Event, state: T_State):
 根据服务器名字查找服务器
 #weapon <bf1/bfv> <id>
 根据玩家ID查找玩家战绩较突出的武器
+#recent <bfv> <name>
+根据玩家ID查询最近游玩信息
 #feedback <msg>
 给bot提建议
 #help
@@ -38,7 +40,7 @@ async def about_handler(bot: Bot, event: Event, state: T_State):
     image.save(img_io, format="PNG")
 
     await about.finish(Message(
-        '版本: 0.5.0 beta 2 (2021.09.07)' +
+        '版本: 0.6.0 beta 1 (2021.09.20)' +
         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
     ))
 

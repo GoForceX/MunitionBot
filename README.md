@@ -43,6 +43,7 @@
 - [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp)
 - [nonebot/nonebot2](https://github.com/nonebot/nonebot2)
 - [gametools.network](https://api.gametools.network/)
+- [Tracker Network](https://battlefieldtracker.com/)
 - [所有战地系列玩家](https://www.ea.com/zh-tw/games/battlefield)
 
 ## 许可证 (LICENSE)
