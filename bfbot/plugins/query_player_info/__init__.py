@@ -70,7 +70,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         "\n爆头率：" +
                         str(result["headshots"]) +
                         "\n最远爆头：" +
-                        str(result["longestHeadshot"]) +
+                        str(result["longestHeadShot"]) +
                         "\nSPM：" +
                         str(result["scorePerMinute"]) +
                         "\nK/D：" +
@@ -121,7 +121,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         result["rank"],
                         result["accuracy"],
                         result["headshots"],
-                        result["longestHeadshot"],
+                        result["longestHeadShot"],
                         result["scorePerMinute"],
                         result["killDeath"],
                         result["killsPerMinute"],
