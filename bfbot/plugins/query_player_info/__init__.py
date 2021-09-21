@@ -19,6 +19,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
         cursor.execute('''
             CREATE TABLE player_data (
                 id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                type            TEXT                NOT NULL,
                 time            NUMERIC             NOT NULL,
                 userName        TEXT                NOT NULL,
                 rank            NUMERIC             NOT NULL,
@@ -91,30 +92,31 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         )
 
                 recent = cursor.execute(
-                    "SELECT * FROM player_data WHERE userName=? ORDER BY id DESC LIMIT 1",
-                    (args[1])
+                    "SELECT * FROM player_data WHERE userName=? AND type=? ORDER BY id DESC LIMIT 1",
+                    (args[1], args[0])
                 ).fetchall()
 
                 upgrade_msg = ""
                 if len(recent) != 0:
                     upgrade_msg_arr = []
-                    if result['rank'] - recent[0][3] > 0:
-                        upgrade_msg_arr.append(f"您的等级增长了{result['rank'] - recent[0][3]}级！")
-                    if result['killDeath'] - recent[0][8] > 0:
-                        upgrade_msg_arr.append(f"您的KD增长了{result['killDeath'] - recent[0][8]}！")
-                    if result['scorePerMinute'] - recent[0][7] > 0:
-                        upgrade_msg_arr.append(f"您的SPM增长了{result['scorePerMinute'] - recent[0][7]}！")
-                    if result['killsPerMinute'] - recent[0][9] > 0:
-                        upgrade_msg_arr.append(f"您的KPM增长了{result['killsPerMinute'] - recent[0][9]}！")
+                    if result['rank'] - recent[0][4] > 0:
+                        upgrade_msg_arr.append(f"您的等级增长了{result['rank'] - recent[0][4]}级！")
+                    if result['killDeath'] - recent[0][9] > 0:
+                        upgrade_msg_arr.append(f"您的KD增长了{result['killDeath'] - recent[0][9]}！")
+                    if result['scorePerMinute'] - recent[0][8] > 0:
+                        upgrade_msg_arr.append(f"您的SPM增长了{result['scorePerMinute'] - recent[0][8]}！")
+                    if result['killsPerMinute'] - recent[0][10] > 0:
+                        upgrade_msg_arr.append(f"您的KPM增长了{result['killsPerMinute'] - recent[0][10]}！")
                     upgrade_msg = "\n".join(upgrade_msg_arr)
 
                 cursor.execute(
                     "INSERT INTO player_data "
-                    "(time, userName, rank, accuracy, headshotRate, longestHeadshot, spm, "
+                    "(time, type, userName, rank, accuracy, headshotRate, longestHeadshot, spm, "
                     "kd, kpm, assists, kills, deaths, wins, loses, winPercent) "
                     "VALUES (?, ?, ?, ?)",
                     (
                         int(time.time()),
+                        args[0],
                         result["userName"],
                         result["rank"],
                         result["accuracy"],
