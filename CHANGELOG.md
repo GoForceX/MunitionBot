@@ -1,4 +1,20 @@
-# [](https://github.com/GoForceX/MunitionBot/compare/v0.5.0-beta.2...v) (2021-09-07)
+# [](https://github.com/GoForceX/MunitionBot/compare/v0.7.0-beta.1...v) (2021-09-21)
+
+
+
+# [0.7.0-beta.1](https://github.com/GoForceX/MunitionBot/compare/v0.5.0-beta.2...v0.7.0-beta.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* Fixed a missing slash. ([0be7c0a](https://github.com/GoForceX/MunitionBot/commit/0be7c0a7b10da73bae7b64fe1689121d1b22eba8))
+* Fixed a wrong json key. ([f7a4abb](https://github.com/GoForceX/MunitionBot/commit/f7a4abb4e97586e897f97e2182d0ae1193d061e1))
+
+
+### Features
+
+* Add player data tracer ([47f3ead](https://github.com/GoForceX/MunitionBot/commit/47f3eadef7829e0f48dbff76e24c12869c60f567))
+* Add player recent plays search. ([2cb74c2](https://github.com/GoForceX/MunitionBot/commit/2cb74c2ec1ae371d0e090750f60b9f38b4797d62))
 
 
 
