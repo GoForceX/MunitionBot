@@ -113,7 +113,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                     "INSERT INTO player_data "
                     "(time, type, userName, rank, accuracy, headshotRate, longestHeadshot, spm, "
                     "kd, kpm, assists, kills, deaths, wins, loses, winPercent) "
-                    "VALUES (?, ?, ?, ?)",
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     (
                         int(time.time()),
                         args[0],
