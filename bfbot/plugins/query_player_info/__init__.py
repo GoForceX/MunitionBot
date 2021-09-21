@@ -132,7 +132,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                     )
                 )
 
-                image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-mod.png'))
+                image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-mod-blur.png'))
                 drawer = ImageDraw.Draw(image)
                 font = ImageFont.truetype(os.path.join(os.path.abspath('.'), 'static', 'HarmonyOS_Sans_SC_Regular.ttf'),
                                           30)
