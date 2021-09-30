@@ -101,12 +101,12 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                     upgrade_msg_arr = []
                     if result['rank'] - recent[0][4] > 0:
                         upgrade_msg_arr.append(f"您的等级增长了{result['rank'] - recent[0][4]}级！")
-                    if result['killDeath'] - recent[0][9] > 0:
-                        upgrade_msg_arr.append(f"您的KD增长了{result['killDeath'] - recent[0][9]}！")
-                    if result['scorePerMinute'] - recent[0][8] > 0:
-                        upgrade_msg_arr.append(f"您的SPM增长了{result['scorePerMinute'] - recent[0][8]}！")
-                    if result['killsPerMinute'] - recent[0][10] > 0:
-                        upgrade_msg_arr.append(f"您的KPM增长了{result['killsPerMinute'] - recent[0][10]}！")
+                    if result['killDeath'] - float(recent[0][9]) > 0:
+                        upgrade_msg_arr.append(f"您的KD增长了{result['killDeath'] - float(recent[0][9])}！")
+                    if result['scorePerMinute'] - float(recent[0][8]) > 0:
+                        upgrade_msg_arr.append(f"您的SPM增长了{result['scorePerMinute'] - float(recent[0][8])}！")
+                    if result['killsPerMinute'] - float(recent[0][10]) > 0:
+                        upgrade_msg_arr.append(f"您的KPM增长了{result['killsPerMinute'] - float(recent[0][10])}！")
                     upgrade_msg = "\n".join(upgrade_msg_arr)
 
                 cursor.execute(
@@ -133,6 +133,8 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         result["winPercent"]
                     )
                 )
+
+                conn.commit()
 
                 image = Image.open(os.path.join(os.path.abspath('.'), 'static', f'{args[0]}-mod-blur.png'))
                 drawer = ImageDraw.Draw(image)
