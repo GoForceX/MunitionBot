@@ -24,6 +24,8 @@ async def help_handler(bot: Bot, event: Event, state: T_State):
     根据玩家ID查找玩家战绩较突出的武器
     #recent <bfv> <name>
     根据玩家ID查询最近游玩信息
+    #trans <origin-lang> <dest-lang> <msg>
+    将您所给的文字翻译成其他语言（源语言可设置为Auto）
     #feedback <msg>
     给bot提建议
     #help
@@ -37,7 +39,7 @@ async def help_handler(bot: Bot, event: Event, state: T_State):
         await help_matcher.finish(msg)
 
 
-about = on_command("about") 
+about = on_command("about")
 
 
 @about.handle()
@@ -47,11 +49,13 @@ async def about_handler(bot: Bot, event: Event, state: T_State):
     image.save(img_io, format="PNG")
 
     await about.finish(Message(
-        '版本: 0.7.1-beta.2+20211003' +
+        '版本: 0.8.0-beta.1+20211003' +
         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
     ))
 
+
 status = on_command("status", permission=SUPERUSER)
+
 
 @status.handle()
 async def status_handler(bot: Bot, event: Event, state: T_State):
