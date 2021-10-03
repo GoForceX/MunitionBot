@@ -81,7 +81,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 
                 await query.finish(
                     Message(
-                        MessageSegment.at(sender_id) + 
+                        (MessageSegment.at(sender_id) if event.get_session_id().startswith('group') else '') +
                         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
                     )
                 )
