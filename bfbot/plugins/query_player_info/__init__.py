@@ -1,14 +1,30 @@
-from nonebot import on_command
-from nonebot.typing import T_State
-from nonebot.adapters import Bot, Event
-import httpx, os, base64, sqlite3, time
-from nonebot.log import logger
+from decimal import Decimal
 from io import BytesIO
+
+import base64
+import httpx
+import os
+import sqlite3
+import time
 from PIL import Image, ImageDraw, ImageFont
-from nonebot.adapters.cqhttp.message import MessageSegment
+from nonebot import on_command
+from nonebot.adapters import Bot, Event
 from nonebot.adapters import Message
+from nonebot.adapters.cqhttp.message import MessageSegment
+from nonebot.log import logger
+from nonebot.typing import T_State
 
 query = on_command("player")
+
+
+def cast_to_decimal(num):
+    """
+    Change a number to an Decimal object to avoid error.
+
+    :param num: Any number that is not converted to the Decimal object.
+    :return: An Decimal object that is equivalent to the num parameter passed.
+    """
+    return Decimal(str(num))
 
 
 @query.handle()
@@ -101,12 +117,18 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                     upgrade_msg_arr = []
                     if result['rank'] - recent[0][4] > 0:
                         upgrade_msg_arr.append(f"您的等级增长了{result['rank'] - recent[0][4]}级！")
-                    if result['killDeath'] - float(recent[0][9]) > 0:
-                        upgrade_msg_arr.append(f"您的KD增长了{result['killDeath'] - float(recent[0][9])}！")
-                    if result['scorePerMinute'] - float(recent[0][8]) > 0:
-                        upgrade_msg_arr.append(f"您的SPM增长了{result['scorePerMinute'] - float(recent[0][8])}！")
-                    if result['killsPerMinute'] - float(recent[0][10]) > 0:
-                        upgrade_msg_arr.append(f"您的KPM增长了{result['killsPerMinute'] - float(recent[0][10])}！")
+                    if cast_to_decimal(result['killDeath']) - cast_to_decimal(recent[0][9]) > 0:
+                        upgrade_msg_arr.append(
+                            f"您的KD增长了{cast_to_decimal(result['killDeath']) - cast_to_decimal(recent[0][9])}！"
+                        )
+                    if cast_to_decimal(result['scorePerMinute']) - cast_to_decimal(recent[0][8]) > 0:
+                        upgrade_msg_arr.append(
+                            f"您的SPM增长了{cast_to_decimal(result['scorePerMinute']) - cast_to_decimal(recent[0][8])}！"
+                        )
+                    if cast_to_decimal(result['killsPerMinute']) - cast_to_decimal(recent[0][10]) > 0:
+                        upgrade_msg_arr.append(
+                            f"您的KPM增长了{cast_to_decimal(result['killsPerMinute']) - cast_to_decimal(recent[0][10])}！"
+                        )
                     upgrade_msg = "\n".join(upgrade_msg_arr)
 
                 cursor.execute(
@@ -146,7 +168,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
 
                 await query.finish(
                     Message(
-                        MessageSegment.at(sender_id) +
+                        (MessageSegment.at(sender_id) if event.get_session_id().startswith('group') else '') +
                         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode()) +
                         upgrade_msg
                     )

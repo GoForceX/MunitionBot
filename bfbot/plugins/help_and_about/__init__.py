@@ -7,31 +7,38 @@ from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from nonebot.permission import SUPERUSER
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-from nonebot.log import logger
 
-help = on_command("help") 
+help_matcher = on_command("help")
 
-@help.handle()
+
+@help_matcher.handle()
 async def help_handler(bot: Bot, event: Event, state: T_State):
-    await help.finish("""指令帮助
-==============
-#player <bf1/bf4/bfv> <id>
-查询某玩家的基本信息
-#server <bf1/bf4/bfv> <name>
-根据服务器名字查找服务器
-#weapon <bf1/bfv> <id>
-根据玩家ID查找玩家战绩较突出的武器
-#recent <bfv> <name>
-根据玩家ID查询最近游玩信息
-#feedback <msg>
-给bot提建议
-#help
-展示此帮助
-#about
-显示bot信息""")
+    sender_id = event.get_user_id()
+    msg = """指令帮助
+    ==============
+    #player <bf1/bf4/bfv> <id>
+    查询某玩家的基本信息
+    #server <bf1/bf4/bfv> <name>
+    根据服务器名字查找服务器
+    #weapon <bf1/bfv> <id>
+    根据玩家ID查找玩家战绩较突出的武器
+    #recent <bfv> <name>
+    根据玩家ID查询最近游玩信息
+    #feedback <msg>
+    给bot提建议
+    #help
+    展示此帮助
+    #about
+    显示bot信息"""
+    if event.get_session_id().startswith('group'):
+        await bot.send_private_msg(user_id=sender_id, message=msg)
+        await help_matcher.finish("为防止刷屏，已经发送至您的私聊。")
+    else:
+        await help_matcher.finish(msg)
 
 
 about = on_command("about") 
+
 
 @about.handle()
 async def about_handler(bot: Bot, event: Event, state: T_State):
@@ -40,7 +47,7 @@ async def about_handler(bot: Bot, event: Event, state: T_State):
     image.save(img_io, format="PNG")
 
     await about.finish(Message(
-        '版本: 0.7.0 beta 6 (2021.09.30)' +
+        '版本: 0.7.1-beta.2+20211003' +
         MessageSegment.image("base64://" + base64.b64encode(img_io.getvalue()).decode())
     ))
 
