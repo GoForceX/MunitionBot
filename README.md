@@ -45,6 +45,7 @@
 - [gametools.network](https://api.gametools.network/)
 - [Tracker Network](https://battlefieldtracker.com/)
 - [所有战地系列玩家](https://www.ea.com/zh-tw/games/battlefield)
+- [Baidu Translate](https://fanyi.baidu.com/)
 
 ## 许可证 (LICENSE)
 
