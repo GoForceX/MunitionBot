@@ -121,9 +121,9 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                         upgrade_msg_arr.append(
                             f"您的KD增长了{cast_to_decimal(result['killDeath']) - cast_to_decimal(recent[0][9])}！"
                         )
-                    if cast_to_decimal(['scorePerMinute']) - cast_to_decimal(recent[0][8]) > 0:
+                    if cast_to_decimal(result['scorePerMinute']) - cast_to_decimal(recent[0][8]) > 0:
                         upgrade_msg_arr.append(
-                            f"您的SPM增长了{cast_to_decimal(['scorePerMinute']) - cast_to_decimal(recent[0][8])}！"
+                            f"您的SPM增长了{cast_to_decimal(result['scorePerMinute']) - cast_to_decimal(recent[0][8])}！"
                         )
                     if cast_to_decimal(result['killsPerMinute']) - cast_to_decimal(recent[0][10]) > 0:
                         upgrade_msg_arr.append(
