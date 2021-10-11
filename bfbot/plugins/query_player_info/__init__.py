@@ -53,6 +53,7 @@ async def handle_message(bot: Bot, event: Event, state: T_State):
                 winPercent      TEXT                NOT NULL
             );
         ''')
+        conn.commit()
 
     sender_id = event.get_user_id()
     args = str(event.get_message()).strip().split(' ')
