@@ -6,8 +6,8 @@ from nonebot import on_command
 from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-import httpx
 from nonebot.log import logger
+import httpx
 
 query = on_command("server")
 
