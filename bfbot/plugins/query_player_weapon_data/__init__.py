@@ -3,7 +3,9 @@ from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event, Message
 from nonebot.adapters.cqhttp.message import MessageSegment
 from nonebot.log import logger
-import httpx, os, base64
+import httpx
+import os
+import base64
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 
