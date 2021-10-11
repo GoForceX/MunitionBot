@@ -1,12 +1,11 @@
 from nonebot import on_command
 from nonebot.typing import T_State
-from nonebot.adapters import Bot, Event
-import httpx, os, base64
+from nonebot.adapters import Bot, Event, Message
+from nonebot.adapters.cqhttp.message import MessageSegment
 from nonebot.log import logger
+import httpx, os, base64
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
-from nonebot.adapters.cqhttp.message import MessageSegment
-from nonebot.adapters import Message
 
 query = on_command("weapon")
 
